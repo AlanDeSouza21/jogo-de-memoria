@@ -1,0 +1,99 @@
+body{
+    background: black;
+}
+
+section{
+    width: 1295px;
+    height: 635px;
+    background: rgb(22, 21, 21);
+    text-align: center;
+}
+
+#fase{
+    width: 120px;
+    height: 40px;
+    font-family: Arial;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    top: 100px;
+    display: flex;
+    align-items: baseline;
+    color: white;
+}
+
+#fase h1 {
+    margin-right: 5px;
+
+}
+
+#pontos{
+    position: relative;
+    top: 215px;
+    font-family: Arial;
+    font-weight: 700;
+    font-display: swap;
+    font-size: 35px;
+    color: white;
+}
+
+#div-pontuacao {
+    font-family: Arial;
+    font-weight: 700;
+    font-size: 130px;
+    border-color: white;
+    color: white;
+    padding-bottom: 5px;
+    top: 200px;
+    margin: auto;
+    right: 0;
+    left: 0;
+    width: 420px;
+    height: 130px;
+    position: absolute;
+    text-align: center;
+    border-bottom-style: solid;
+}
+
+#start{
+    width: 245px;
+    height: 66px;
+    font-family: "inter";
+    font-size: 50px;
+    font-weight: bold;
+    border-radius: 11px;
+    border-style: none;
+    margin-top: 30px;
+}
+
+#conjunto-btn{
+    width: 1295px;
+    height: 100px;
+    background: none;
+    margin-top: 350px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#amarelo{
+    width: 348px;
+    height: 66px;
+    background: yellow;
+    border: none;
+}
+
+#vermelho{
+    width: 348px;
+    height: 66px;
+    background: red;
+    border: none;
+}
+
+#verde{
+    width: 348px;
+    height: 66px;
+    background: green;
+    border: none;
+}
