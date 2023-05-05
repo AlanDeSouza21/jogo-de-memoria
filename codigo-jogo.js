@@ -6,6 +6,7 @@ let verde = document.getElementById("verde")
 let vermelho = document.getElementById("vermelho")
 let start = document.getElementById("start")
 let restart = document.getElementById("restart")
+let puntuacao = document.getElementById("div-pontuacao")
 
 restart.style.display = 'none'
 
@@ -53,15 +54,50 @@ function RandomNumbers(){
         }
       }
   }
+  return numeros
 }
     
-
+var intervalo =''
 function inicio(){
   restart.style.display = 'block'
   start.style.display = 'none'
-
-  
+  selecionaBTN()
+  interval = setInterval(selecionaBTN, 1000)
 }
+
+function selecionaBTN(){
+  var randomicos = RandomNumbers()
+  for (var p = 0; p < randomicos.length; p++){
+    if(randomicos[p] === 1){
+      acendeBTN_vermelho()
+    }
+    else if(randomicos[p] === 2){
+      acendeBTN_verde()
+    }
+    else if(randomicos[p] === 3){
+      acendeBTN_amarelo()
+    }
+  }
+}
+
+function acendeBTN_vermelho(){
+  amarelo.style.background = 'rgb(126, 126, 1)'
+  verde.style.background = 'rgb(0, 97, 0)'
+  vermelho.style.background = 'red'
+}
+function acendeBTN_verde(){
+  amarelo.style.background = 'rgb(126, 126, 1)'
+  verde.style.background = 'green'
+  vermelho.style.background = 'rgb(124, 0, 0)'
+}
+function acendeBTN_amarelo(){
+  amarelo.style.background = 'yellow'
+  verde.style.background = 'rgb(0, 97, 0)'
+  vermelho.style.background = 'rgb(124, 0, 0)'
+}
+
+
+
       //d[8]=9
 
       /*
