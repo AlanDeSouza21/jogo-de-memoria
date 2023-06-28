@@ -1,4 +1,4 @@
-let fase = 12
+let fase = 13
 let numeros = []
 let filtro = []
 let amarelo = document.getElementById("amarelo")
@@ -15,93 +15,103 @@ function RandomNumbers(){
     var aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1
     numeros.push(aleatorio)
   }
-  console.log(numeros)
-  
-  let substitui3 = ''
-  let substitui1 = ''
-  let substitui2 = ''
-  let indice = 0
-  for(let mostra of numeros){
-      filtro.push(mostra)
-      indice++
-      if(filtro.length === 3){
-        if(filtro[0] === filtro[1] && filtro[1] === filtro[2]){
-
-          if(numeros[indice-1] === 3){
-            filtro.splice(0)
-            substitui3 = Math.floor(Math.random() * (2 - 1 + 1)) + 1
-            console.log(`substituiu 3  |  ${numeros[indice-1]=substitui3}  |  vetor numeros ${numeros}`)
-          }
-          else if(numeros[indice-1] === 1){
-            filtro.splice(0)
-            substitui1 = Math.floor(Math.random() * (3 - 2 + 1)) + 2
-            console.log(`substituiu 1  |  ${numeros[indice-1]=substitui1}  |  vetor numeros ${numeros}`)
-          }
-          else if(numeros[indice-1] === 2){
-            filtro.splice(0)
-            substitui2 = Math.floor(Math.random() * (3 - 2 + 1)) + 2
-            if(substitui2 === 3 || substitui2 === 1){
-              console.log(`substituiu 2a  |  ${numeros[indice-1]=substitui2}  |  vetor numeros ${numeros}`)
-              if(substitui2 === 2){
-                console.log(`substituiu 2b  |  ${numeros[indice-1]=1}  |  vetor numeros ${numeros}`)
-              }
-            }
-          }
-        }
-        else{
-          filtro.splice(0)
-          console.log(`diferença  |  ${numeros[indice]}`)
-        }
-      }
-  }
-  return numeros
+  let converteString = numeros.toString()
+  let Tira_Virg = converteString.replace(/,/g, "")
+  let repete_UM = Tira_Virg.replace(/111/g, 113)
+  let repete_DOIS = repete_UM.replace(/222/g, 221)
+  let repete_TRES = repete_DOIS.replace(/333/g, 332)
+  let converteVETOR = repete_TRES.split("")
+  return converteVETOR
 }
-    
+
 var intervalo =''
+
 function inicio(){
   restart.style.display = 'block'
   start.style.display = 'none'
+
+  intervalo = setInterval(selecionaBTN, 1000)
   selecionaBTN()
-  interval = setInterval(selecionaBTN, 1000)
+
 }
 
+var numerosRand = RandomNumbers()
+var percorre = 0
+var intervalo2 = ''
+
 function selecionaBTN(){
-  var randomicos = RandomNumbers()
-  for (var p = 0; p < randomicos.length; p++){
-    if(randomicos[p] === 1){
+  console.log('vetor: '+numerosRand)
+  var conteudoVETOR = numerosRand[percorre++]
+
+    if(conteudoVETOR == 1){
       acendeBTN_vermelho()
+      console.log('vermelho')
     }
-    else if(randomicos[p] === 2){
+    if(conteudoVETOR == 2){
       acendeBTN_verde()
+      console.log('verde')
     }
-    else if(randomicos[p] === 3){
+    if(conteudoVETOR == 3){
       acendeBTN_amarelo()
+      console.log('amarelo')
     }
-  }
+    if(percorre > numerosRand.length){
+      console.log('ACABOU!!!')
+      clearInterval(intervalo)
+    }
+
 }
 
 function acendeBTN_vermelho(){
-  amarelo.style.background = 'rgb(126, 126, 1)'
-  verde.style.background = 'rgb(0, 97, 0)'
+  amarelo.style.background = 'rgb(0, 0, 0)'
+  verde.style.background = 'rgb(0, 0, 0)'
   vermelho.style.background = 'red'
+  
+  intervalo2 = setTimeout(apagaTUDO, 700)
 }
+
 function acendeBTN_verde(){
-  amarelo.style.background = 'rgb(126, 126, 1)'
+  amarelo.style.background = 'rgb(0, 0, 0)'
   verde.style.background = 'green'
-  vermelho.style.background = 'rgb(124, 0, 0)'
+  vermelho.style.background = 'rgb(0, 0, 0)'
+
+  intervalo2 = setTimeout(apagaTUDO, 700)
 }
+
 function acendeBTN_amarelo(){
   amarelo.style.background = 'yellow'
-  verde.style.background = 'rgb(0, 97, 0)'
-  vermelho.style.background = 'rgb(124, 0, 0)'
+  verde.style.background = 'rgb(0, 0, 0)'
+  vermelho.style.background = 'rgb(0, 0, 0)'
+
+  intervalo2 = setTimeout(apagaTUDO, 700)
 }
 
+function apagaTUDO(){
+  amarelo.style.background = 'rgb(0, 0, 0)'
+  verde.style.background = 'rgb(0, 0, 0)'
+  vermelho.style.background = 'rgb(0, 0, 0)'
+}
 
+let armaBTN_user = []
 
-      //d[8]=9
+function interaAMARELO(a){
+  armaBTN_user.push(a)
+  console.log('Vetor Interação: '+armaBTN_user)
+}
 
-      /*
-      console.log(`de 1 a 2 == ${substitui = Math.floor(Math.random() * (2 - 1 + 1)) + 1}`)
-      console.log(`de 2 a 3 == ${substitui = Math.floor(Math.random() * (3 - 2 + 1)) + 2}`)
-      */
+function interaVERDE(v){
+  armaBTN_user.push(v)
+  console.log('Vetor Interação: '+armaBTN_user)
+}
 
+function interaVERMELHO(verm){
+  armaBTN_user.push(verm)
+  console.log('Vetor Interação: '+armaBTN_user)
+}
+
+function interacao(){
+  var pontos = ''
+
+  console.log('Vetor Interação: '+armaBTN_user)
+
+}

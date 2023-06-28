@@ -96,20 +96,23 @@ section{
 #amarelo{
     width: 348px;
     height: 66px;
-    background: rgb(126, 126, 1);
-    border: none;
+    background: rgb(0, 0, 0);
+    border: solid;
+    border-color: yellow;
 }
 
 #vermelho{
     width: 348px;
     height: 66px;
-    background: rgb(124, 0, 0);
-    border: none;
+    background: rgb(0, 0, 0);
+    border: solid;
+    border-color: red;
 }
 
 #verde{
     width: 348px;
     height: 66px;
-    background: rgb(0, 97, 0);
-    border: none;
+    background: rgb(0, 0, 0);
+    border: solid;
+    border-color: green;
 }
