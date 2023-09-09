@@ -23,6 +23,7 @@ function inicio(){
   restart.style.display = 'block'
   intervalo = setInterval(selecionaBTN, 1000)
 
+  numeros.length = 0
 }
 
 var numerosRand = [1]
@@ -167,7 +168,6 @@ function compara(){
       }
 
     }
-
   }
   let indice = 0
   if (acumula_ERROS.length == numerosRand.length) {
@@ -355,8 +355,9 @@ function continua(){
   RandomNumbers()
 }
 
-calc_Fase = fase * 2
+
 function RandomNumbers(){
+  calc_Fase = fase * 2
   for (var i = 0; i < calc_Fase; i++) {
     var aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1
     numeros.push(aleatorio)
