@@ -1,5 +1,4 @@
 let fase = 1
-let calc_Fase = fase * 2
 let numeros = []
 let filtro = []
 let amarelo = document.getElementById("amarelo")
@@ -21,7 +20,7 @@ function inicio(){
     restart.style.display = 'block'
     start.style.display = 'none'
   }
-
+  restart.style.display = 'block'
   intervalo = setInterval(selecionaBTN, 1000)
 
 }
@@ -91,6 +90,7 @@ let pontos = 0
 //--------------------------------------- INTERAÇÃO USUÁRIO E BOTÕES --------------------------------\\
 
 document.addEventListener("keyup", function(e){
+
   if(e.key === "ArrowDown"){
     interaVERDE(2)
   }
@@ -103,6 +103,7 @@ document.addEventListener("keyup", function(e){
 })
 
 function interaAMARELO(a){
+
   armaBTN_user.push(a)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -116,6 +117,7 @@ function interaAMARELO(a){
 }
 
 function interaVERDE(v){
+
   armaBTN_user.push(v)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -129,6 +131,7 @@ function interaVERDE(v){
 }
 
 function interaVERMELHO(verm){
+
   armaBTN_user.push(verm)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -187,7 +190,7 @@ function compara(){
 //--------------------------------------- RESULTADO --------------------------------\\
 
 var interval_CARREGAMENTO = ''
-var tempo_Anima_pontos = 50
+var tempo_Anima_pontos = 25
 
 function POS_comparacao(){
 fase++
@@ -323,6 +326,7 @@ function carregaFase(){
 
   if(seg >= 0){
     Mensagem_Carrega.style.display = "block"
+    restart.style.display = 'block'
     Mensagem_Carrega.innerHTML = "ATENÇÃO: iniciando fase "+fase+" em "+seg+" segundos"
   }
   else{
@@ -338,18 +342,20 @@ function carregaFase(){
 
 function continua(){
   
-  restart.style.display = 'none'
-
-  calc_Fase = fase * 2
-  numerosRand.shift()
-  armaBTN_user.shift()
-  acumula_ERROS.shift()
+  restart.style.display = 'block'
+  continuar.style.display = 'none'
+  
+  numerosRand.length = 0
+  armaBTN_user.length = 0
+  acumula_ERROS.length = 0
   percorre = 0
   seg + 6
   console.log('vetor interação botão: '+armaBTN_user)
+  console.log('vetor numeros aleatorios: '+numerosRand)
   RandomNumbers()
 }
 
+calc_Fase = fase * 2
 function RandomNumbers(){
   for (var i = 0; i < calc_Fase; i++) {
     var aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1
