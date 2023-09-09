@@ -16,15 +16,16 @@
 <body>
     <section>
         <button id="start" onclick="inicio()">START</button>
-        <button id="restart">REINICIAR</button>
-
+        <button id="restart">---</button>
+        <button id="continuar"onclick="continua()">CONTINUE</button>
+        <div id="mensagem-CARREGA"></div>
         <div id="div-pontuacao">
             0000
         </div>
 
         <h1 id="pontos">PONTUAÇÃO</h1>
 
-        <div id="fase"> <h1>1ª</h1> Fase </div>
+        <div id="fase"> <h1 id="num_Ponto">1ª</h1> Fase </div>
 
     <div id="conjunto-btn">
         <button id="amarelo" onclick="interaAMARELO('3')">

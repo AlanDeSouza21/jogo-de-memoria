@@ -1,4 +1,4 @@
-let fase = 2
+let fase = 1
 let calc_Fase = fase * 2
 let numeros = []
 let filtro = []
@@ -7,37 +7,26 @@ let verde = document.getElementById("verde")
 let vermelho = document.getElementById("vermelho")
 let start = document.getElementById("start")
 let restart = document.getElementById("restart")
+let continuar = document.getElementById("continuar")
 let puntuacao = document.getElementById("div-pontuacao")
 
 restart.style.display = 'none'
-//--------------------------------------- GERADOR DE NUMEROS --------------------------------\\
-function RandomNumbers(){
-  for (var i = 0; i < calc_Fase; i++) {
-    var aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1
-    numeros.push(aleatorio)
-  }
-  // EVITA REPETIÇÕES
-  let converteString = numeros.toString()
-  let Tira_Virg = converteString.replace(/,/g, "")
-  let repete_UM = Tira_Virg.replace(/111/g, 113)
-  let repete_DOIS = repete_UM.replace(/222/g, 221)
-  let repete_TRES = repete_DOIS.replace(/333/g, 332)
-  let converteVETOR = repete_TRES.split("")
-  return converteVETOR
-}
+continuar.style.display = 'none'
 
 var intervalo =''
+
 //--------------------------------------- INICIA AÇÃO --------------------------------\\
 function inicio(){
-  restart.style.display = 'block'
-  start.style.display = 'none'
+  if(fase <= 1){
+    restart.style.display = 'block'
+    start.style.display = 'none'
+  }
 
   intervalo = setInterval(selecionaBTN, 1000)
-  selecionaBTN()
 
 }
 
-var numerosRand = RandomNumbers()
+var numerosRand = [1]
 var percorre = 0
 var intervalo2 = ''
 //--------------------------------------- SELECIONA BOTÕES QUE SERÃO ACESSOS --------------------------------\\
@@ -196,11 +185,185 @@ function compara(){
 }
 
 //--------------------------------------- RESULTADO --------------------------------\\
-function POS_comparacao(){
-  fase = fase + 1
-  console.log('fase: '+fase)
-  alert('pontos: '+pontos)
 
+var interval_CARREGAMENTO = ''
+var tempo_Anima_pontos = 50
+
+function POS_comparacao(){
+fase++
+if(pontos >= 0 && pontos < 10){
+  interval_CARREGAMENTO = setInterval(umDIGITO, tempo_Anima_pontos)
+  umDIGITO()
+}
+if(pontos >= 10 && pontos < 100){
+  interval_CARREGAMENTO = setInterval(doisDIGITO, tempo_Anima_pontos)
+  doisDIGITO()
+}
+if(pontos >= 100 && pontos < 1000){
+  interval_CARREGAMENTO = setInterval(tresDIGITO, tempo_Anima_pontos)
+  tresDIGITO()
+}
+if(pontos > 1000){
+  interval_CARREGAMENTO = setInterval(quatroDIGITO, tempo_Anima_pontos)
+  quatroDIGITO()
+}
+}
+
+var acumulaPonto = 0
+
+function umDIGITO(){
+acumulaPonto++
+
+if(acumulaPonto >= 0 && acumulaPonto < 10){
+document.getElementById("div-pontuacao").innerHTML = "000"+acumulaPonto
+}
+if(acumulaPonto >= 10 && acumulaPonto < 100){
+document.getElementById("div-pontuacao").innerHTML = "00"+acumulaPonto
+}
+if(acumulaPonto >= 100 && acumulaPonto < 1000){
+document.getElementById("div-pontuacao").innerHTML = "0"+acumulaPonto
+}
+if(acumulaPonto > 1000){
+document.getElementById("div-pontuacao").innerHTML = acumulaPonto
+}
+else if(acumulaPonto === pontos){
+clearInterval(interval_CARREGAMENTO)
+document.getElementById("num_Ponto").innerHTML = fase+"ª"
+
+inter_fase()
+}
+}
+
+function doisDIGITO(){
+acumulaPonto++
+
+if(acumulaPonto >= 0 && acumulaPonto < 10){
+document.getElementById("div-pontuacao").innerHTML = "000"+acumulaPonto
+}
+if(acumulaPonto >= 10 && acumulaPonto < 100){
+document.getElementById("div-pontuacao").innerHTML = "00"+acumulaPonto
+}
+if(acumulaPonto >= 100 && acumulaPonto < 1000){
+document.getElementById("div-pontuacao").innerHTML = "0"+acumulaPonto
+}
+if(acumulaPonto > 1000){
+document.getElementById("div-pontuacao").innerHTML = acumulaPonto
+}
+else if(acumulaPonto === pontos){
+clearInterval(interval_CARREGAMENTO)
+document.getElementById("num_Ponto").innerHTML = fase+"ª"
+
+inter_fase()
+}
+}
+
+function tresDIGITO(){
+acumulaPonto++
+
+if(acumulaPonto >= 0 && acumulaPonto < 10){
+document.getElementById("div-pontuacao").innerHTML = "000"+acumulaPonto
+}
+if(acumulaPonto >= 10 && acumulaPonto < 100){
+document.getElementById("div-pontuacao").innerHTML = "00"+acumulaPonto
+}
+if(acumulaPonto >= 100 && acumulaPonto < 1000){
+document.getElementById("div-pontuacao").innerHTML = "0"+acumulaPonto
+}
+if(acumulaPonto > 1000){
+document.getElementById("div-pontuacao").innerHTML = acumulaPonto
+}
+else if(acumulaPonto === pontos){
+clearInterval(interval_CARREGAMENTO)
+document.getElementById("num_Ponto").innerHTML = fase+"ª"
+
+inter_fase()
+}
+}
+
+function quatroDIGITO(){
+acumulaPonto++
+if(acumulaPonto >= 0 && acumulaPonto < 10){
+document.getElementById("div-pontuacao").innerHTML = "000"+acumulaPonto
+}
+if(acumulaPonto >= 10 && acumulaPonto < 100){
+document.getElementById("div-pontuacao").innerHTML = "00"+acumulaPonto
+}
+if(acumulaPonto >= 100 && acumulaPonto < 1000){
+document.getElementById("div-pontuacao").innerHTML = "0"+acumulaPonto
+}
+if(acumulaPonto > 1000){
+document.getElementById("div-pontuacao").innerHTML = acumulaPonto
+}
+else if(acumulaPonto === pontos){
+clearInterval(interval_CARREGAMENTO)
+document.getElementById("num_Ponto").innerHTML = fase+"ª"
+inter_fase()
+}
+}
+
+
+var intervalo_FASE = ''
+
+var seg = 6
+function inter_fase(){
+  if(seg === -1){
+    seg = 6
+  }
+  intervalo_FASE = setInterval(carregaFase, 1000)
+  carregaFase()
+  
+}
+
+var Mensagem_Carrega = document.getElementById("mensagem-CARREGA")
+
+function carregaFase(){
+  console.log("valor segundos: "+seg)
+
+  seg--
+
+  if(seg >= 0){
+    Mensagem_Carrega.style.display = "block"
+    Mensagem_Carrega.innerHTML = "ATENÇÃO: iniciando fase "+fase+" em "+seg+" segundos"
+  }
+  else{
+    clearInterval(intervalo_FASE)
+    Mensagem_Carrega.style.display = "none"
+    restart.style.display = 'none'
+    continuar.style.display = 'block'
+    
+  }
+
+}
+
+
+function continua(){
+  
+  restart.style.display = 'none'
+
+  calc_Fase = fase * 2
+  numerosRand.shift()
+  armaBTN_user.shift()
+  acumula_ERROS.shift()
+  percorre = 0
+  seg + 6
+  console.log('vetor interação botão: '+armaBTN_user)
   RandomNumbers()
+}
+
+function RandomNumbers(){
+  for (var i = 0; i < calc_Fase; i++) {
+    var aleatorio = Math.floor(Math.random() * (3 - 1 + 1)) + 1
+    numeros.push(aleatorio)
+  }
+  // EVITA REPETIÇÕES
+  let converteString = numeros.toString()
+  let Tira_Virg = converteString.replace(/,/g, "")
+  let repete_UM = Tira_Virg.replace(/111/g, 113)
+  let repete_DOIS = repete_UM.replace(/222/g, 221)
+  let repete_TRES = repete_DOIS.replace(/333/g, 332)
+  let converteVETOR = repete_TRES.split("")
+  //return converteVETOR
+  numerosRand = converteVETOR
+  console.log('vetor para acender luz: '+numerosRand)
   inicio()
 }
