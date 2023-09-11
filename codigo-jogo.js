@@ -104,7 +104,9 @@ document.addEventListener("keyup", function(e){
 })
 
 function interaAMARELO(a){
-
+  if(valida === 1){
+    throw new Error('jogo finalizado, não é possível interagir')
+  }
   armaBTN_user.push(a)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -118,7 +120,9 @@ function interaAMARELO(a){
 }
 
 function interaVERDE(v){
-
+  if(valida === 1){
+    throw new Error('jogo finalizado, não é possível interagir')
+  }
   armaBTN_user.push(v)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -132,7 +136,9 @@ function interaVERDE(v){
 }
 
 function interaVERMELHO(verm){
-
+  if(valida === 1){
+    throw new Error('jogo finalizado, não é possível interagir')
+  }
   armaBTN_user.push(verm)
   console.log('Vetor Interação: '+armaBTN_user)
 
@@ -154,6 +160,7 @@ function interacao(){
 
 //--------------------------------------- COMPARAÇÃO --------------------------------\\
 let acumula_ERROS = []
+var valida = 0
 function compara(){
 
   if (armaBTN_user.length == numerosRand.length) {
@@ -174,7 +181,8 @@ function compara(){
       for(mostra of acumula_ERROS){
           if(mostra == 'erro'){
             alert('FALHOU: pontuação máxima obtida: '+pontos)
-            throw new Error('ERRO!!!')
+            valida = 1
+            POS_comparacao()
           }
           else{
             indice++
@@ -235,6 +243,11 @@ document.getElementById("num_Ponto").innerHTML = fase+"ª"
 
 inter_fase()
 }
+if(valida === 1){
+  Mensagem_Carrega.innerHTML = "GAME OVER PONTUAÇÃO FINAL: "+pontos
+  ERRO()
+}
+
 }
 
 function doisDIGITO(){
@@ -257,6 +270,10 @@ clearInterval(interval_CARREGAMENTO)
 document.getElementById("num_Ponto").innerHTML = fase+"ª"
 
 inter_fase()
+}
+if(valida === 1){
+  Mensagem_Carrega.innerHTML = "GAME OVER PONTUAÇÃO FINAL: "+pontos
+  ERRO()
 }
 }
 
@@ -281,6 +298,10 @@ document.getElementById("num_Ponto").innerHTML = fase+"ª"
 
 inter_fase()
 }
+if(valida === 1){
+  Mensagem_Carrega.innerHTML = "GAME OVER PONTUAÇÃO FINAL: "+pontos
+  ERRO()
+}
 }
 
 function quatroDIGITO(){
@@ -302,14 +323,24 @@ clearInterval(interval_CARREGAMENTO)
 document.getElementById("num_Ponto").innerHTML = fase+"ª"
 inter_fase()
 }
+if(valida === 1){
+  Mensagem_Carrega.innerHTML = "GAME OVER PONTUAÇÃO FINAL: "+pontos
+  ERRO()
+}
 }
 
+function ERRO(){
+  restart.style.display = 'block'
+  clearInterval(intervalo_FASE)
+  throw new Error('jogo finalizado, não é possível interagir')
+
+}
 
 var intervalo_FASE = ''
 
 var seg = 6
 function inter_fase(){
-  if(seg === -1){
+  if(seg === -1 || seg === 0){
     seg = 6
   }
   intervalo_FASE = setInterval(carregaFase, 1000)
@@ -323,19 +354,27 @@ function carregaFase(){
   console.log("valor segundos: "+seg)
 
   seg--
-
-  if(seg >= 0){
+  if(seg == 5 || seg == 4){
     Mensagem_Carrega.style.display = "block"
     restart.style.display = 'block'
-    Mensagem_Carrega.innerHTML = "ATENÇÃO: iniciando fase "+fase+" em "+seg+" segundos"
+
+    console.log('segundos de 5 a 4')
+    Mensagem_Carrega.innerHTML = "Parabéns!!!"
   }
-  else{
+  else if (seg >= 1 && seg <= 3) {
+    Mensagem_Carrega.style.display = "block"
+    restart.style.display = 'block'
+
+    console.log('segundos de 3 a 1')
+    Mensagem_Carrega.innerHTML = "Você avançou para fase: "+fase
+  }
+  else if(seg === 0){
     clearInterval(intervalo_FASE)
     Mensagem_Carrega.style.display = "none"
     restart.style.display = 'none'
     continuar.style.display = 'block'
-    
-  }
+}
+
 
 }
 
